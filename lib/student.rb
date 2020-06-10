@@ -34,7 +34,10 @@ class Student
   def save
     if self.id != nil
       sql = <<-SQL #UPDATE [table name] SET [column name] = [new value] WHERE [column name] = [value];
-        UPDATE students SET name = ?, grade = ? WHERE id = ?
+        UPDATE students 
+        SET name = ?, 
+        grade = ? 
+        WHERE id = ?
       SQL
       
       DB[:conn].execute(sql, self.name, self.name, self.id)
