@@ -52,8 +52,8 @@ class Student
     end
   end
   
-  def self.create(input)
-    student = Student.new(input[:name], input[:grade])
+  def self.create(name, grade)
+    student = Student.new(name, grade)
     student.save
     return student
   end
