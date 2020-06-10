@@ -12,7 +12,7 @@ class Student
     @@all << self
   end
   
-  def self.table_exists(name)
+  def table_exists(name)
     sql = <<-SQL
       if exists (select 1 from information_schema.tables where table_name = '?')
     SQL
@@ -40,7 +40,7 @@ class Student
   end
   
   def save
-    if !self.table_exists(self.name)
+    if !table_exists(self.name)
       sql = <<-SQL
         INSERT INTO students (name, grade) 
         VALUES (?, ?)
