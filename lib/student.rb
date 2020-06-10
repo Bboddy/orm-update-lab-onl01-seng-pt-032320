@@ -30,6 +30,15 @@ class Student
       SQL
       
        DB[:conn].execute(sql)
+    else
+      sql = <<-SQL
+        CREATE TABLE students (
+        id INTEGER PRIMARY KEY,
+        name TEXT, 
+        grade INTEGER);
+      SQL
+      
+       DB[:conn].execute(sql)
   end
   
   def self.drop_table
