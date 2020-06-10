@@ -12,6 +12,12 @@ class Student
     @@all << self
   end
   
+  def self.table_exists
+    sql = <<-SQL
+      
+    SQL
+  end
+  
   def self.create_table
     sql = <<-SQL
       CREATE TABLE students (
