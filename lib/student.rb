@@ -14,7 +14,7 @@ class Student
   
   def self.table_exists
     sql = <<-SQL
-      IF 
+      if exists (select 1 from information_schema.tables where table_name = 'students')
     SQL
   end
   
