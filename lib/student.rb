@@ -21,6 +21,7 @@ class Student
   end
   
   def self.create_table
+    if self.table_exists
     sql = <<-SQL
       CREATE TABLE students (
       id INTEGER PRIMARY KEY,
