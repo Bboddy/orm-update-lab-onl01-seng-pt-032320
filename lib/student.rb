@@ -14,7 +14,7 @@ class Student
   
   def self.table_exists
     sql = <<-SQL
-      
+      IF 
     SQL
   end
   
