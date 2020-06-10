@@ -35,8 +35,11 @@ class Student
     if self.id != nil
       sql = <<-SQL
         UPDATE students SET name = ?
-        grade = ? WHERE id = 
+        grade = ? 
+        WHERE id = ?
       SQL
+      
+      DB[:conn].execute(sql, self.name, self.name, self.id)
     else
       sql = <<-SQL
         INSERT INTO students (name, grade) 
