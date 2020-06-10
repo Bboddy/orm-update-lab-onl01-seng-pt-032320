@@ -40,9 +40,9 @@ class Student
   end
   
   def save
-    if self.table_exists(self.name)
+    if !self.table_exists(self.name)
       sql = <<-SQL
-        UPDATE students (name, grade) 
+        INSERT INTO students (name, grade) 
         VALUES (?, ?)
       SQL
    
