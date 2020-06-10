@@ -34,7 +34,8 @@ class Student
   def save
     if self.id != nil
       sql = <<-SQL
-        UPDATE students SET name = ?
+        UPDATE students
+        name = ?
         grade = ? 
         WHERE id = ?
       SQL
