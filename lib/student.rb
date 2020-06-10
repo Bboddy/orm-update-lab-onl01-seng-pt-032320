@@ -50,7 +50,7 @@ class Student
    
       @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
     else
-      sql = <<-SQL #UPDATE [table name] SET [column name] = [new value] WHERE [column name] = [value];
+      sql = <<-SQL
         UPDATE INTO [students] SET [name, grade]  = [?, ?]
       SQL
    
