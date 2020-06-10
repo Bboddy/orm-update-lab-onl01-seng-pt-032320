@@ -1,7 +1,7 @@
 require_relative "../config/environment.rb"
 
 class Student
-  attr_accessor :name, :grade
+ attr_accessor :name, :grade
   attr_reader :id
   @@all= []
   
@@ -10,14 +10,6 @@ class Student
     @grade = grade
     @id = id
     @@all << self
-  end
-  
-  def table_exists(name)
-    sql = <<-SQL
-      if exists (select 1 from information_schema.tables where table_name = '?')
-    SQL
-    
-    DB[:conn].execute(sql, name)
   end
   
   def self.create_table
@@ -40,24 +32,14 @@ class Student
   end
   
   def save
-    if !table_exists(self.name)
-      sql = <<-SQL
-        INSERT INTO students (name, grade) 
-        VALUES (?, ?)
-      SQL
-   
-      DB[:conn].execute(sql, self.name, self.grade)
-   
-      @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
-    else
-      sql = <<-SQL
-        UPDATE INTO [students] SET [name, grade]  = [?, ?]
-      SQL
-   
-      DB[:conn].execute(sql, self.name, self.grade)
-   
-      @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
-    end
+    sql = <<-SQL
+      INSERT INTO students (name, grade) 
+      VALUES (?, ?)
+    SQL
+ 
+    DB[:conn].execute(sql, self.name, self.grade)
+ 
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
   end
   
   def self.create(input)
