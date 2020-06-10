@@ -12,33 +12,23 @@ class Student
     @@all << self
   end
   
-  def self.table_exists
+  def self.table_exists(name)
     sql = <<-SQL
-      if exists (select 1 from information_schema.tables where table_name = 'students')
+      if exists (select 1 from information_schema.tables where table_name = '?')
     SQL
     
-    DB[:conn].execute(sql)
+    DB[:conn].execute(sql, name)
   end
   
   def self.create_table
-    if self.table_exists
-      sql = <<-SQL
-        CREATE TABLE students (
-        id INTEGER PRIMARY KEY,
-        name TEXT, 
-        grade INTEGER);
-      SQL
-      
-       DB[:conn].execute(sql)
-    else
-      sql = <<-SQL
-        CREATE TABLE students (
-        id INTEGER PRIMARY KEY,
-        name TEXT, 
-        grade INTEGER);
-      SQL
-      
-       DB[:conn].execute(sql)
+    sql = <<-SQL
+      CREATE TABLE students (
+      id INTEGER PRIMARY KEY,
+      name TEXT, 
+      grade INTEGER);
+    SQL
+    
+     DB[:conn].execute(sql)
   end
   
   def self.drop_table
