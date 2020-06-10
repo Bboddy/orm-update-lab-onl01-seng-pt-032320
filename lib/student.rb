@@ -16,6 +16,8 @@ class Student
     sql = <<-SQL
       if exists (select 1 from information_schema.tables where table_name = 'students')
     SQL
+    
+    DB[:conn].execute(sql)
   end
   
   def self.create_table
